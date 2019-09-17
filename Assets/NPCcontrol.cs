@@ -9,7 +9,6 @@ public class NPCcontrol : MonoBehaviour
     void Start()
     {
         flyclaw = GameObject.Instantiate(reference) as GameObject;
-        flyclaw.transform.position = new Vector3(40, 2, -40);
         flyclaw.AddComponent<Flyclaw>();
         
         foreach (var item in FindObjectsOfType(typeof(GameObject)) as GameObject[])
@@ -29,27 +28,32 @@ public class NPCcontrol : MonoBehaviour
 
 public class Flyclaw : MonoBehaviour
 {
-    Vector3 pointzone, pointzone2, direction;
+    Vector3 pointzone, 
+            direction;
+    float timecont = 100;
+    int timelapse = 100;
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
-        pointzone = new Vector3(40, 2, -40);
-        pointzone2 = new Vector3(40, 2, -4);
+        transform.position = GameObject.Find("FlyclawZone").transform.position;
+        pointzone = GameObject.Find("FlyclawZone").transform.position;
     }
-    float timecont = 0;
-    float directioncont = 0;
     private void Update()
     {
-        timecont++;
-        
-        if (timecont == 100)
+        if (timecont == timelapse)
         {
             timecont = 0;
             direction = PointDir(pointzone, 40, 40);
-            Debug.Log(direction);
+            timelapse = Random.Range(10, 200);
         }
-        transform.position += direction*0.5f;
+        transform.position += direction * 0.5f;
+        timecont++;
     }
-    Vector3 PointDir(Vector3 CenterZone, float rangeX, float rangeZ)
+
+    Vector3 PointDir(Vector3 CenterZone, float rangeX, float rangeZ) 
     {
         Vector3 point;
         float randomX = Random.Range(CenterZone.x - (rangeX / 2), CenterZone.x + (rangeX / 2)), 
