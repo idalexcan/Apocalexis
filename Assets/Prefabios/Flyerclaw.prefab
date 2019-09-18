@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4090007733757986002}
   - component: {fileID: 764427634872335117}
   m_Layer: 0
-  m_Name: Flyclaw
+  m_Name: Flyerclaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

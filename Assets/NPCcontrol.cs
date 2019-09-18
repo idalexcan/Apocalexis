@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class NPCcontrol : MonoBehaviour
 {
-    public GameObject reference;
-    public static GameObject flyclaw;
+    public GameObject reference, reference2;
+    public static GameObject flyerclaw;
+    public static List<GameObject> flyerclaws=new List<GameObject>();
+    public static int cantflyer;
     void Start()
     {
-        flyclaw = GameObject.Instantiate(reference) as GameObject;
-        flyclaw.AddComponent<Flyclaw>();
-        
+        //flyerclaw = GameObject.Instantiate(reference) as GameObject;
+        //flyerclaw.AddComponent<Flyerclaw>();
+
+        for (int i = 0; i < 1; i++)
+        {
+            flyerclaws.Add(GameObject.Instantiate(reference2));
+            flyerclaws[i].transform.position = GameObject.Find("FlyerclawZone").transform.position;
+            //flyerclaws[i].transform.position = Flyerclaw.InitialPos();
+            //flyerclaws[i].AddComponent<Flyerclaw>();
+
+        }
+
         foreach (var item in FindObjectsOfType(typeof(GameObject)) as GameObject[])
         {
             if (item.transform.name=="sujeto")
@@ -26,52 +37,4 @@ public class NPCcontrol : MonoBehaviour
     }
 }
 
-public class Flyclaw : MonoBehaviour
-{
-    Vector3 pointzone, 
-            direction;
-    float timecont = 100;
-    int timelapse = 100;
-    private void Awake()
-    {
-        
-    }
-    private void Start()
-    {
-        transform.position = GameObject.Find("FlyclawZone").transform.position;
-        pointzone = GameObject.Find("FlyclawZone").transform.position;
-    }
-    private void Update()
-    {
-        if (timecont == timelapse)
-        {
-            timecont = 0;
-            direction = PointDir(pointzone, 40, 40);
-            timelapse = Random.Range(10, 200);
-        }
-        transform.position += direction * 0.5f;
-        timecont++;
-    }
 
-    Vector3 PointDir(Vector3 CenterZone, float rangeX, float rangeZ) 
-    {
-        Vector3 point;
-        float randomX = Random.Range(CenterZone.x - (rangeX / 2), CenterZone.x + (rangeX / 2)), 
-              randomZ = Random.Range(CenterZone.z - (rangeZ / 2), CenterZone.z + (rangeZ / 2));
-        point = new Vector3(randomX, 2, randomZ);
-        return (point-transform.position).normalized;
-    }
-
-    ///-------------------------------------------------------------------------------------------------------------------------------------
-    ///-------------------------------------------------<|EXTRAS|>--------------------------------------------------------------------------
-    void BasicMoving()
-    {
-        timecont++;
-        if (timecont == 50)
-        {
-            timecont = 0;
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + (Random.Range(-70, 71)), 0);
-        }
-        transform.position += transform.forward * 0.05f;
-    }///-----------------------------------------------------------------------------------<|Movimiento pero más fluido
-}
