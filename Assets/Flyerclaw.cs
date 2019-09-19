@@ -9,26 +9,31 @@ public class Flyerclaw : MonoBehaviour
     /// < direction dirección que indica cada cierto tiempo a hacia donde moverse (dentro de la flyerclaw zone)
     /// < timelapse el tiempo que determina cuando cambia la dirección 
     /// </summary>
-    public static GameObject myzone;
+    GameObject myzone;
     Vector3 direction;
     float timecont = 0;
     int timelapse = 0;
+    GameObject garrita;
+    List<GameObject> claws = new List<GameObject>();
     private void Awake()
     {
-        myzone = GameObject.Find("FlyerclawZone");
-        //transform.position = new Vector3(Random.Range(myzone.transform.position.x, myzone.transform.localScale.x), 3, 0);
+        myzone = NPCcontrol.flyclawZones[Random.Range(0, NPCcontrol.flyclawZones.Length)];
+        transform.position = InitialPos();
     }
     private void Start()
     {
-        //Vector3 zonepos = GameObject.Find("FlyerclawZone").transform.position;
-        //transform.position = new Vector3(
-        //    Random.Range(zonepos.x - 20, zonepos.x + 20),  
-        //    3,                                              
-        //    Random.Range(zonepos.z - 20, zonepos.z + 20));
-
+        //GameObject.FindGameObjectWithTag("claw");
+        claws.Add(GameObject.FindGameObjectWithTag("claw"));
+        claws[0].AddComponent<ClawControl>();
     }
     private void Update()
     {
+        Moving();
+    }
+
+    void Moving()
+    {
+
         if (timecont == timelapse)
         {
             timecont = 0;
@@ -36,35 +41,26 @@ public class Flyerclaw : MonoBehaviour
             timelapse = Random.Range(5, 500);
             direction = transform.forward;
         }
-        timecont++;
         if ((transform.position - myzone.transform.position).magnitude >= myzone.transform.localScale.z / 2)
         {
             direction = (myzone.transform.position - transform.position).normalized;
         }
-        transform.position += direction * 0.05f;
+        transform.position += direction * 0.07f;
+        timecont++;
+        GameObject.Find("Body").transform.eulerAngles = new Vector3(0, 0, 0);
+        GameObject.Find("DiscBody").transform.eulerAngles = new Vector3(0, 0, 0); ;
     }
 
-
-    public static Vector3 InitialPos()
+    Vector3 InitialPos()
     {
-        Vector3 zonepos = GameObject.Find("FlyerclawZone").transform.position;
+        Vector3 zonepos = myzone.transform.position;// GameObject.Find("FlyerclawZone").transform.position;
         float rx = Random.Range(zonepos.x - myzone.transform.localScale.x, zonepos.x + myzone.transform.localScale.x);
-        return zonepos;
-        //(Random.Range(zonepos.x - myzone.transform.localScale.x, zonepos.x + myzone.transform.localScale.x),
-        //zonepos.y+3,
-        //Random.Range(zonepos.z - myzone.transform.localScale.z, zonepos.z + myzone.transform.localScale.z));
+        return new Vector3
+        (Random.Range(zonepos.x - myzone.transform.localScale.x / 2, zonepos.x + myzone.transform.localScale.x / 2),
+        zonepos.y + 6,
+        Random.Range(zonepos.z - myzone.transform.localScale.z / 2, zonepos.z + myzone.transform.localScale.z / 2));
     }
 
     ///-------------------------------------------------------------------------------------------------------------------------------------
     ///-------------------------------------------------<|EXTRAS|>--------------------------------------------------------------------------
-    void BasicMoving()
-    {
-        timecont++;
-        if (timecont == 50)
-        {
-            timecont = 0;
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + (Random.Range(-70, 71)), 0);
-        }
-        transform.position += transform.forward * 0.05f;
-    }///-----------------------------------------------------------------------------------<|Movimiento pero más fluido
 }
