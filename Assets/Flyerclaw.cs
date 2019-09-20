@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flyerclaw : MonoBehaviour
 {
-    /// <|SUMARIO|>
+    /// <|VARIABLES DE MOVIMIENTO|>
     /// < myzone Referencia de la zona de flayerclaws
     /// < direction dirección que indica cada cierto tiempo a hacia donde moverse (dentro de la flyerclaw zone)
     /// < timelapse el tiempo que determina cuando cambia la dirección 
@@ -13,18 +13,27 @@ public class Flyerclaw : MonoBehaviour
     Vector3 direction;
     float timecont = 0;
     int timelapse = 0;
-    GameObject garrita;
+    /// <summary>
+    /// <|VARIABLES SOBRE GARRAS VOLADORAS xd|>
+    /// <claws Lista de garras voladoras
+    /// </summary>
     List<GameObject> claws = new List<GameObject>();
+    public int myindex;
     private void Awake()
     {
         myzone = NPCcontrol.flyclawZones[Random.Range(0, NPCcontrol.flyclawZones.Length)];
-        transform.position = InitialPos();
+        transform.position =  InitialPos();
     }
     private void Start()
     {
-        //GameObject.FindGameObjectWithTag("claw");
-        claws.Add(GameObject.FindGameObjectWithTag("claw"));
-        claws[0].AddComponent<ClawControl>();
+        foreach (var item in GameObject.FindGameObjectsWithTag("claw"))
+        {
+            if (!item.GetComponent<ClawControl>())
+            {
+                GameObject.FindGameObjectWithTag("claw").AddComponent<ClawControl>();
+            }
+        }
+        
     }
     private void Update()
     {
@@ -53,7 +62,7 @@ public class Flyerclaw : MonoBehaviour
 
     Vector3 InitialPos()
     {
-        Vector3 zonepos = myzone.transform.position;// GameObject.Find("FlyerclawZone").transform.position;
+        Vector3 zonepos = myzone.transform.position;
         float rx = Random.Range(zonepos.x - myzone.transform.localScale.x, zonepos.x + myzone.transform.localScale.x);
         return new Vector3
         (Random.Range(zonepos.x - myzone.transform.localScale.x / 2, zonepos.x + myzone.transform.localScale.x / 2),
@@ -61,6 +70,12 @@ public class Flyerclaw : MonoBehaviour
         Random.Range(zonepos.z - myzone.transform.localScale.z / 2, zonepos.z + myzone.transform.localScale.z / 2));
     }
 
-    ///-------------------------------------------------------------------------------------------------------------------------------------
-    ///-------------------------------------------------<|EXTRAS|>--------------------------------------------------------------------------
+}
+
+public class Claw : MonoBehaviour
+{
+    void Start()
+    {
+        transform.position += new Vector3(0, 0, 0.5f);
+    }
 }
