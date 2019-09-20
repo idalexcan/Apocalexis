@@ -13,36 +13,51 @@ public class Flyerclaw : MonoBehaviour
     Vector3 direction;
     float timecont = 0;
     int timelapse = 0;
-    /// <summary>
     /// <|VARIABLES SOBRE GARRAS VOLADORAS xd|>
     /// <claws Lista de garras voladoras
     /// </summary>
-    List<GameObject> claws = new List<GameObject>();
-    public int myindex;
+    GameObject clawref;
+    public GameObject[] claws;
+    public int cantclaw = 0;
+    GameObject me;
     private void Awake()
     {
         myzone = NPCcontrol.flyclawZones[Random.Range(0, NPCcontrol.flyclawZones.Length)];
         transform.position =  InitialPos();
-    }
-    private void Start()
-    {
-        foreach (var item in GameObject.FindGameObjectsWithTag("claw"))
+        claws = GameObject.FindGameObjectsWithTag("inactiveClaw") as GameObject[];
+        foreach (var item in claws)
         {
-            if (!item.GetComponent<ClawControl>())
+            if (cantclaw!=0)
             {
-                GameObject.FindGameObjectWithTag("claw").AddComponent<ClawControl>();
+                item.SetActive(false);
             }
+            item.tag = "activeClaw";
+            cantclaw++;
         }
-        
+        cantclaw = 0;
+
     }
+    
     private void Update()
     {
         Moving();
+        if (cantclaw<claws.Length-1)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CreateClaw();
+            }
+        }
+    }
+
+    public void CreateClaw()
+    {
+        cantclaw++;
+        claws[cantclaw].SetActive(true);
     }
 
     void Moving()
     {
-
         if (timecont == timelapse)
         {
             timecont = 0;
@@ -56,8 +71,6 @@ public class Flyerclaw : MonoBehaviour
         }
         transform.position += direction * 0.07f;
         timecont++;
-        GameObject.Find("Body").transform.eulerAngles = new Vector3(0, 0, 0);
-        GameObject.Find("DiscBody").transform.eulerAngles = new Vector3(0, 0, 0); ;
     }
 
     Vector3 InitialPos()
@@ -72,10 +85,3 @@ public class Flyerclaw : MonoBehaviour
 
 }
 
-public class Claw : MonoBehaviour
-{
-    void Start()
-    {
-        transform.position += new Vector3(0, 0, 0.5f);
-    }
-}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCcontrol : MonoBehaviour
 {
-    public GameObject reference, reference2;
+    public GameObject flyerclawref;
     public static List<GameObject> flyerclaws=new List<GameObject>();
     public static int cantflyer;
     public static GameObject[] flyclawZones;
@@ -16,14 +16,13 @@ public class NPCcontrol : MonoBehaviour
             item.GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
     }
+
     void Start()
     {
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 4; i++)
         {
-            flyerclaws.Add(GameObject.Instantiate(reference2));
-            flyerclaws[i].AddComponent<Flyerclaw>().myindex=i;
+            flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
-
         foreach (var item in FindObjectsOfType(typeof(GameObject)) as GameObject[]) //COLOR DE SUJETOS (TEMPROAL)
         {
             if (item.transform.name=="sujeto")

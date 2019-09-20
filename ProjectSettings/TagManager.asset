@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - flyclaw
-  - claw
   - flyclawzone
+  - activeClaw
+  - inactiveClaw
+  - claw
   layers:
   - Default
   - TransparentFX
