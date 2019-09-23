@@ -18,13 +18,18 @@ public class Flyerclaw : MonoBehaviour
     /// </summary>
     GameObject clawref;
     public GameObject[] claws;
+    public bool newclaw;
     public int cantclaw = 0;
-    GameObject me;
+
+    public GameObject body;
     private void Awake()
     {
+        
         myzone = NPCcontrol.flyclawZones[Random.Range(0, NPCcontrol.flyclawZones.Length)];
-        transform.position =  InitialPos();
+        transform.position =  InzonePos();
+        transform.position += new Vector3(0, 6, 0);
         claws = GameObject.FindGameObjectsWithTag("inactiveClaw") as GameObject[];
+        
         foreach (var item in claws)
         {
             if (cantclaw!=0)
@@ -37,7 +42,11 @@ public class Flyerclaw : MonoBehaviour
         cantclaw = 0;
 
     }
-    
+    private void Start()
+    {
+        body.GetComponent<BodyController>().claws = claws;
+    }
+
     private void Update()
     {
         Moving();
@@ -48,7 +57,15 @@ public class Flyerclaw : MonoBehaviour
                 CreateClaw();
             }
         }
+        if (newclaw)
+        {
+            CreateClaw();
+            newclaw = false;
+        }
+        body.transform.position = transform.position;
     }
+
+    
 
     public void CreateClaw()
     {
@@ -61,25 +78,26 @@ public class Flyerclaw : MonoBehaviour
         if (timecont == timelapse)
         {
             timecont = 0;
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + (Random.Range(-180, 181)), 0);
             timelapse = Random.Range(5, 500);
-            direction = transform.forward;
+            direction = (InzonePos() - transform.position).normalized;
         }
         if ((transform.position - myzone.transform.position).magnitude >= myzone.transform.localScale.z / 2)
         {
             direction = (myzone.transform.position - transform.position).normalized;
         }
-        transform.position += direction * 0.07f;
+        transform.position += direction * 0.01f;
         timecont++;
+        transform.eulerAngles += new Vector3(0, 1, 0);
+
     }
 
-    Vector3 InitialPos()
+    Vector3 InzonePos()
     {
         Vector3 zonepos = myzone.transform.position;
         float rx = Random.Range(zonepos.x - myzone.transform.localScale.x, zonepos.x + myzone.transform.localScale.x);
         return new Vector3
         (Random.Range(zonepos.x - myzone.transform.localScale.x / 2, zonepos.x + myzone.transform.localScale.x / 2),
-        zonepos.y + 6,
+        zonepos.y,
         Random.Range(zonepos.z - myzone.transform.localScale.z / 2, zonepos.z + myzone.transform.localScale.z / 2));
     }
 

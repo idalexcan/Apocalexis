@@ -19,7 +19,7 @@ public class NPCcontrol : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
@@ -30,12 +30,15 @@ public class NPCcontrol : MonoBehaviour
                 item.GetComponent<MeshRenderer>().material.color = Color.yellow;
             }
         }
+
     }
 
     void Update()
     {
-        
+        Destroy(GameObject.Find("dead"));
     }
 }
+
+
 
 
