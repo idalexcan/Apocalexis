@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7018cb1aa92aa498438a7693d32028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyerclawref: {fileID: 3299717671727622758, guid: 0951dc2d012d7d3478cb7e853332de5f,
+  flyerclawref: {fileID: 7334824523874440202, guid: 0951dc2d012d7d3478cb7e853332de5f,
     type: 3}
 --- !u!4 &1814450475
 Transform:
@@ -777,7 +777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939996426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.403, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5224, z: 0}
   m_LocalScale: {x: 19.043396, y: 0.018173259, z: 19.043396}
   m_Children: []
   m_Father: {fileID: 90201351}

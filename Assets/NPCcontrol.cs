@@ -11,10 +11,6 @@ public class NPCcontrol : MonoBehaviour
     private void Awake()
     {
         flyclawZones = GameObject.FindGameObjectsWithTag("flyclawzone");
-        foreach (var item in flyclawZones)
-        {
-            item.GetComponent<MeshRenderer>().material.color = Color.yellow;
-        }
     }
 
     void Start()
@@ -22,21 +18,11 @@ public class NPCcontrol : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
+            flyerclaws[i].transform.position += new Vector3(i * 2, 0, 0);
         }
-        foreach (var item in FindObjectsOfType(typeof(GameObject)) as GameObject[]) //COLOR DE SUJETOS (TEMPROAL)
-        {
-            if (item.transform.name=="sujeto")
-            {
-                item.GetComponent<MeshRenderer>().material.color = Color.yellow;
-            }
-        }
-
+        
     }
 
-    void Update()
-    {
-        Destroy(GameObject.Find("dead"));
-    }
 }
 
 
