@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandControl : Flyerclaw
+public class Handtimerrol : MonoBehaviour
 {
     public GameObject myclaw;
-    int cont = 0;
+    int timer = 0;
 
     void Update()
     {
@@ -27,12 +27,12 @@ public class HandControl : Flyerclaw
 
     void MoveClaw()
     {
-        cont++;
-        if (cont <= 8)
+        timer++;
+        if (timer <= 8)
         {
             myclaw.transform.position += transform.up * 0.6f;
         }
-        else if (cont <= 70)
+        else if (timer <= 70)
         {
             if ((transform.position - myclaw.transform.position).magnitude > 0.5f)
             {
@@ -41,7 +41,7 @@ public class HandControl : Flyerclaw
         }
         else
         {
-            cont = 0;
+            timer = 0;
         }
     }
 }

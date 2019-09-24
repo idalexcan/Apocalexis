@@ -6,7 +6,6 @@ public class NPCcontrol : MonoBehaviour
 {
     public GameObject flyerclawref;
     public static List<GameObject> flyerclaws=new List<GameObject>();
-    public static int cantflyer;
     public static GameObject[] flyclawZones;
     private void Awake()
     {
@@ -15,12 +14,14 @@ public class NPCcontrol : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
-            flyerclaws[i].transform.position += new Vector3(i * 2, 0, 0);
         }
         
+
+
+
     }
 
 }
