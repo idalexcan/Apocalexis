@@ -19,7 +19,7 @@ public class Flyerclaw : MonoBehaviour
         {
             transform.position -= transform.forward * 0.2f;
         }
-    }
+    } 
     
 }
 

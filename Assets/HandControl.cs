@@ -28,11 +28,11 @@ public class HandControl : Flyerclaw
     void MoveClaw()
     {
         cont++;
-        if (cont <= 5)
+        if (cont <= 8)
         {
-            myclaw.transform.position += transform.up * 0.4f;
+            myclaw.transform.position += transform.up * 0.6f;
         }
-        else if (cont <= 50)
+        else if (cont <= 70)
         {
             if ((transform.position - myclaw.transform.position).magnitude > 0.5f)
             {
