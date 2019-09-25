@@ -18,12 +18,8 @@ public class NPCcontrol : MonoBehaviour
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
-        
-
-
 
     }
-
 }
 
 

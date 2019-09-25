@@ -36,7 +36,7 @@ public class Flyerclaw : MonoBehaviour
     ///--------------------------------------------------------------------------------------------------------|
     
     
-    ///------------------------------------------------------------------<|Mover
+    ///------------------------------------------------------------------<|Movimiento del flyerclaw
     void Moving()
     {
 
@@ -52,7 +52,7 @@ public class Flyerclaw : MonoBehaviour
         transform.eulerAngles += new Vector3(0, direcRotate, 0);
     }
 
-    ///------------------------------------------------------------------<|Retornar vector dentro de zona
+    ///------------------------------------------------------------------<|Retorno de vector dentro de zona
     Vector3 PosInZone()
     {
         float range = myzone.transform.localScale.x / 2;

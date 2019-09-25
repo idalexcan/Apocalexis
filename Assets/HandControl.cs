@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Handtimerrol : MonoBehaviour
+public class HandControl : MonoBehaviour
 {
     public GameObject myclaw;
     int timer = 0;
+
+
+    ///--------------------------------------<|MÉTODOS DEL MONO BIJEBIO|>--------------------------------------|
+    ///--------------------------------------------------------------------------------------------------------|
 
     void Update()
     {
@@ -13,6 +17,10 @@ public class Handtimerrol : MonoBehaviour
         AttackClaw();
     }
 
+    ///-----------------------------------------<|MÉTODOS DE CLASE|>-------------------------------------------|
+    ///--------------------------------------------------------------------------------------------------------|
+
+    ///------------------------------------------------------------------<|Ataque de la garra al agarrar
     void AttackClaw()
     {
         foreach (var item in GameObject.FindGameObjectsWithTag("Player"))
@@ -20,11 +28,12 @@ public class Handtimerrol : MonoBehaviour
             if ((item.transform.position - myclaw.transform.position).magnitude < 1)
             {
                 item.GetComponent<MeshRenderer>().material.color = Color.red;
+                Destroy(item);
             }
         }
     }
 
-
+    ///------------------------------------------------------------------<|Movimiento de garra
     void MoveClaw()
     {
         timer++;
@@ -44,4 +53,5 @@ public class Handtimerrol : MonoBehaviour
             timer = 0;
         }
     }
+
 }
