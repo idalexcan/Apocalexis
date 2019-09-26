@@ -4,54 +4,62 @@ using UnityEngine;
 
 public class HeroControl : MonoBehaviour
 {
-    public GameObject heroref;
-    public static GameObject rebanada;
-    public static Vector3 pos;
-    public static float velocity=40;
-
-    private void Awake()
-    {
-        rebanada = Instantiate(heroref);
-        rebanada.AddComponent<Rebanada>();
-    }
-    
+    public static float velocity = 5;
+    public static float speed;
+    public GameObject mybody;
+    bool looking;
     private void Update()
     {
-        
+        GameObject.Find("Head").transform.eulerAngles = GameObject.Find("Main Camera").transform.eulerAngles;
+        Moving();
     }
-}
-
-public class Rebanada : MonoBehaviour
-{
-    public Vector3 pos;
-    public float velocity=3;
-
-    private void Awake()
+     
+    void Moving()
     {
-        pos = transform.position;
-    }
-    private void Update()
-    {
-        transform.eulerAngles = CameraControl.rotY;
-        pos = transform.position;
+        //if (looking)
+        //{
+        //    transform.eulerAngles = new Vector3(0, CameraControl.rotY, 0);transform.eulerAngles = new Vector3(0, CameraControl.rotY, 0);
+        //}
+        transform.eulerAngles = new Vector3(0, CameraControl.rotY, 0); //transform.eulerAngles = new Vector3(0, CameraControl.rotY, 0);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = velocity * 2;
+        }
+        else
+        {
+            speed = velocity;
+        }
         if (Input.GetKey("w"))
         {
-            transform.position += transform.forward * velocity / 10;
+            //looking = true;
+            transform.position += transform.forward * speed / 50;
+            mybody.transform.eulerAngles = new Vector3(speed, transform.eulerAngles.y, 0);
         }
-        if (Input.GetKey("s"))
+        else if (Input.GetKey("s"))
         {
-            transform.position -= transform.forward * velocity / 10;
+            //looking = true;
+            transform.position -= transform.forward * speed / 50;
+            mybody.transform.eulerAngles = new Vector3(-speed, transform.eulerAngles.y, 0);
         }
-        if (Input.GetKey("d"))
+        else if (Input.GetKey("d"))
         {
-            transform.position += transform.right * velocity / 10;
+            //looking = true;
+            transform.position += transform.right * speed / 50;
         }
-        if (Input.GetKey("a"))
+        else if (Input.GetKey("a"))
         {
-            transform.position -= transform.right * velocity / 10;
+            //looking = true;
+            transform.position -= transform.right * speed / 50;
+        }
+        else
+        {
+            //looking = false;
+            mybody.transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
 
 }
+
+
 
 

@@ -14,7 +14,7 @@ public class NPCcontrol : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 0; i++)
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
