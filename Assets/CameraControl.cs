@@ -9,10 +9,18 @@ public class CameraControl : MonoBehaviour
 
     void Update()
     {
+        //transform.position = GameObject.Find("Rebanada").transform.position;
+        //transform.position += new Vector3(0, 0.5f, 0);
         x -= Input.GetAxis("Mouse Y");
         y += Input.GetAxis("Mouse X");
         transform.eulerAngles = new Vector3(x, y, 0);
         rotY = transform.eulerAngles.y;
+        Moving();
+    }
+    void Moving()
+    {
+        transform.position = GameObject.Find("Rebanada").transform.position;
+        transform.position += new Vector3(0, 0.5f, 0);
     }
 }
 

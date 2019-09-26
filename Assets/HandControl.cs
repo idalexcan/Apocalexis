@@ -43,7 +43,7 @@ public class HandControl : MonoBehaviour
         }
         else if (timer <= 70)
         {
-            if ((transform.position - myclaw.transform.position).magnitude > 0.5f)
+            if ((transform.position - myclaw.transform.position).magnitude > 0.3f)
             {
                 myclaw.transform.position += (transform.position - myclaw.transform.position).normalized * 0.2f;
             }

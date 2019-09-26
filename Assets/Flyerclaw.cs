@@ -48,7 +48,7 @@ public class Flyerclaw : MonoBehaviour
             timer = 0;
             timelapse = Random.Range(5, 170);
         }
-        transform.position += direcMove * 0.07f;
+        transform.position += direcMove * 0.04f;
         transform.eulerAngles += new Vector3(0, direcRotate, 0);
     }
 
