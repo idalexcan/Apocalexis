@@ -39,7 +39,7 @@ public class HandControl : MonoBehaviour
         timer++;
         if (timer <= 8)
         {
-            myclaw.transform.position += transform.up * 0.6f;
+            myclaw.transform.position += transform.up * 0.4f;
         }
         else if (timer <= 70)
         {
