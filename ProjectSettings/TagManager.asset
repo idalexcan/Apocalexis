@@ -9,6 +9,7 @@ TagManager:
   - activeClaw
   - inactiveClaw
   - claw
+  - weapon
   layers:
   - Default
   - TransparentFX
