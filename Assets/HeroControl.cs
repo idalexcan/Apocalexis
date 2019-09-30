@@ -9,18 +9,20 @@ public class HeroControl : MonoBehaviour
     
     private void Awake()
     {
-        GameObject.Find("Impulser").AddComponent<Proyectile>();
+        GameObject.Find("Proyectile").AddComponent<Proyectile>();
     }
     private void Update()
     {
-        GameObject.Find("Head").transform.eulerAngles = GameObject.Find("Main Camera").transform.eulerAngles;
+        
         Moving();
+        GameObject.Find("Proyectile").GetComponent<Proyectile>().initialpos = transform.position;
     }
      
     void Moving()
     {
         //<|DIRECCIONAMIENTO>
         transform.eulerAngles = new Vector3(0, GameObject.Find("Main Camera").transform.eulerAngles.y, 0);
+        GameObject.Find("Head").transform.eulerAngles = GameObject.Find("Main Camera").transform.eulerAngles;
         //<|CAMBIO DE VELOCIDAD|>
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -50,8 +52,6 @@ public class HeroControl : MonoBehaviour
         
     }
 
-
-
 }
 
 
@@ -60,16 +60,33 @@ public class Proyectile : MonoBehaviour
     float impulse;
     float impulseaux;
     bool shot;
+    int timer;
 
+    public Vector3 initialpos;
+    
     private void Update()
     {
-        Debug.Log(impulse);
-        if (Input.GetKey(KeyCode.Space))
+        //Debug.Log(Input.GetMouseButton(0));
+        
+        if (timer==100)
+        {
+            Shot();
+        }
+        else
+        {
+            timer++;
+            Debug.Log("waiting!!");
+        }
+    }
+
+    void Shot()
+    {
+        if (Input.GetMouseButton(0))
         {
             impulse += 25;
-            
+
         }
-        else if (impulse!=0)
+        else if (impulse != 0)
         {
             shot = true;
             impulseaux = impulse;
@@ -78,8 +95,14 @@ public class Proyectile : MonoBehaviour
         if (shot)
         {
             GetComponent<Rigidbody>().AddForce(transform.forward * impulseaux);
-            Debug.Log("LANZAMIENTO!---------->"+impulseaux);
+            Debug.Log("LANZAMIENTO!---------->" + impulseaux);
             shot = false;
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            transform.position = initialpos + new Vector3(0, 0, 2);
+            GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         }
     }
 }
