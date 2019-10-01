@@ -28,13 +28,12 @@ public class Levitus : MonoBehaviour
             
         }
 
-        if (taked!=null)
+        if (taked != null && taked.transform.name == "Spear") 
         {
-            
+            taked.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
             if (Input.GetMouseButtonDown(0))
             {
-                //taked.transform.eulerAngles = transform.eulerAngles;
-                taked.GetComponent<Rigidbody>().AddForce(GameObject.Find("Head").transform.forward * 2000);////new Vector3(0,2,3)*1000)
+                taked.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position-transform.position).normalized * 2000);////new Vector3(0,2,3)*1000)
                 throwed = true;
                 taked = null;
             }
@@ -43,9 +42,7 @@ public class Levitus : MonoBehaviour
                 if (!throwed)
                 {
                     taked.transform.position = transform.position;
-                    taked.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
                 }
-
             }
         }
         if (throwed)
@@ -57,8 +54,5 @@ public class Levitus : MonoBehaviour
                 timer = 0;
             }
         }
-        //Debug.Log("lanzamiento:"+throwed+" objeto:"+taked)
-        Debug.Log(taked);
-        
     }
 }

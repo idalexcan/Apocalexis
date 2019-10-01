@@ -44,27 +44,11 @@ public class HeroControl : MonoBehaviour
         //<|MOVIMIENTO>
         if (Input.GetKey("w"))
         {
-            
-            if (Input.GetMouseButton(1))
-            {
-                levitus.transform.position += transform.forward * speed / 50;
-            }
-            else
-            {
-                transform.position += transform.forward * speed / 50;
-            }
+            transform.position += transform.forward * speed / 50;
         }
         if (Input.GetKey("s"))
         {
-            
-            if (Input.GetMouseButton(1))
-            {
-                levitus.transform.position -= transform.forward * speed / 50;
-            }
-            else
-            {
-                transform.position -= transform.forward * speed / 50;
-            }
+            transform.position -= transform.forward * speed / 50;
         }
 
         if (Input.GetKey("d"))
@@ -80,36 +64,7 @@ public class HeroControl : MonoBehaviour
 
     void LevitusControl()
     {
-        //<|DIRECCIONAMIENTO>
-        transform.eulerAngles = new Vector3(0, GameObject.Find("Main Camera").transform.eulerAngles.y, 0);
-        GameObject.Find("Head").transform.eulerAngles = GameObject.Find("Main Camera").transform.eulerAngles;
-        //<|CAMBIO DE VELOCIDAD|>
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = velocity * 2;
-        }
-        else
-        {
-            speed = velocity;
-        }
-        //<|MOVIMIENTO>
-        if (Input.GetKey("w"))
-        {
-            levitus.transform.position += transform.forward * speed / 50;
-        }
-        if (Input.GetKey("s"))
-        {
-            levitus.transform.position -= transform.forward * speed / 50;
-        }
-        //if (Input.GetKey("d"))
-        //{
-        //    levitus.transform.position += transform.right * speed / 50;
-        //}
-        //if (Input.GetKey("a"))
-        //{
-        //    levitus.transform.position -= transform.right * speed / 50;
-        //}
-        //levitus.transform.position += new Vector3(Input.GetAxis("Mouse X") * 0.1f, Input.GetAxis("Mouse Y") * 0.1f, 0);
+        
     }
 }
 
