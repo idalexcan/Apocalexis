@@ -6,25 +6,15 @@ public class HeroControl : MonoBehaviour
 {
     public static float velocity = 5;
     public static float speed;
-    public GameObject levitus;
     
     private void Awake()
     {
+        Debug.Log("a la mierda");
         //GameObject.Find("Proyectile").AddComponent<Proyectile>();
     }
     private void Update()
     {
-        //if (Input.GetMouseButton(1))
-        //{
-        //    LevitusControl();
-        //}
-        //else
-        //{
-        //    Moving();
-        //}
         Moving();
-
-        //GameObject.Find("Proyectile").GetComponent<Proyectile>().initialpos = transform.position;
     }
      
     void Moving()
@@ -62,10 +52,6 @@ public class HeroControl : MonoBehaviour
         
     }
 
-    void LevitusControl()
-    {
-        
-    }
 }
 
 
@@ -80,8 +66,6 @@ public class Proyectile : MonoBehaviour
     
     private void Update()
     {
-        //Debug.Log(Input.GetMouseButton(0));
-        
         if (timer==100)
         {
             Shot();

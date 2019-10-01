@@ -6,7 +6,11 @@ public class CameraControl : MonoBehaviour
 {
     public static float rotY;
     float x = 0, y = 0;
-    
+
+    private void Start()
+    {
+        //GameObject.Find("sujeto").AddComponent<Prueba>();
+    }
 
     void Update()
     {
@@ -20,5 +24,38 @@ public class CameraControl : MonoBehaviour
     
 }
 
+public class Prueba : MonoBehaviour
+{
+    int timer = 0;
+    Vector3 initialpos;
+    private void Start()
+    {
+        initialpos = transform.position;
+    }
+    private void Update()
+    {
+        timer++;
+        if (timer<5)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                transform.position += new Vector3(0.5f, 0, 0);
+            }
+            
+        }
+        else if (timer<10)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                transform.position -= new Vector3(0.5f, 0, 0);
+            }
 
+        }
+        else
+        {
+            timer = 0;
+            transform.position = initialpos;
+        }
+    }
+}
 

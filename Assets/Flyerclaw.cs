@@ -17,6 +17,8 @@ public class Flyerclaw : MonoBehaviour
     float direcRotate;
     int timelapse = 50;
 
+
+    bool blind;
     ///--------------------------------------<|MÉTODOS DEL MONO BIJEBIO|>--------------------------------------|
     ///--------------------------------------------------------------------------------------------------------|
 
@@ -28,7 +30,9 @@ public class Flyerclaw : MonoBehaviour
     
     private void Update()
     {
-        Moving();
+
+        //Moving();
+
     }
 
 
@@ -63,3 +67,16 @@ public class Flyerclaw : MonoBehaviour
     }
 }
 
+public class Eye : MonoBehaviour
+{
+    public bool striked = false;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag=="weapon")
+        {
+            striked = true;
+            GetComponent<SphereCollider>().enabled = false;
+        }
+        Debug.Log("ay hijueputa");
+    }
+}

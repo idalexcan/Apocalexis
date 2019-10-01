@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Levitus : MonoBehaviour
 {
-    GameObject taked;
+    GameObject weapon;
+    GameObject throwedobj;
     bool throwed;
     int timer;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
+
     void Update()
     {
         foreach (var item in GameObject.FindGameObjectsWithTag("weapon"))
@@ -21,34 +19,40 @@ public class Levitus : MonoBehaviour
             {
                 if ((item.transform.position - transform.position).magnitude < 0.2f)
                 {
-                    taked = item;
-
+                    weapon = item;
                 }
             }
-            
         }
 
-        if (taked != null && taked.transform.name == "Spear") 
+        ToSpear();
+        
+    }
+
+    void ToSpear()
+    {
+        if (weapon != null && weapon.transform.name == "Spear")
         {
-            taked.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
+            weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
+            weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            weapon.GetComponent<Rigidbody>().useGravity = false;
             if (Input.GetMouseButtonDown(0))
             {
-                taked.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position-transform.position).normalized * 2000);////new Vector3(0,2,3)*1000)
+                weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * 1000);////new Vector3(0,2,3)*1000)
                 throwed = true;
-                taked = null;
+                weapon = null;
             }
             else
             {
                 if (!throwed)
                 {
-                    taked.transform.position = transform.position;
+                    weapon.transform.position = transform.position;
                 }
             }
         }
         if (throwed)
         {
             timer++;
-            if (timer==70)
+            if (timer == 70)
             {
                 throwed = false;
                 timer = 0;
@@ -56,3 +60,6 @@ public class Levitus : MonoBehaviour
         }
     }
 }
+
+
+
