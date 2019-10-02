@@ -10,6 +10,8 @@ public class NPCcontrol : MonoBehaviour
     private void Awake()
     {
         flyclawZones = GameObject.FindGameObjectsWithTag("flyclawzone");
+
+        
     }
 
     void Start()
@@ -29,6 +31,13 @@ public class NPCcontrol : MonoBehaviour
             {
                 Destroy(item);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject go = GameObject.Instantiate(GameObject.Find("Rocket"));
+            go.transform.position = GameObject.Find("Takeball").transform.position;
+            go.transform.tag = "weapon";
         }
     }
 }
