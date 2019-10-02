@@ -17,8 +17,8 @@ public class Flyerclaw : MonoBehaviour
     float direcRotate;
     int timelapse = 50;
 
-
-    bool blind;
+    public GameObject[] organs = new GameObject[4];
+    public bool died; 
     ///--------------------------------------<|MÉTODOS DEL MONO BIJEBIO|>--------------------------------------|
     ///--------------------------------------------------------------------------------------------------------|
 
@@ -33,17 +33,42 @@ public class Flyerclaw : MonoBehaviour
 
         //Moving();
 
+
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name=="Rocket")
+        {
+            foreach (var item in organs)
+            {
+                if (item.GetComponent<SphereCollider>())
+                {
+                    item.GetComponent<SphereCollider>().enabled = true;
+                }
+                if (item.GetComponent<CapsuleCollider>())
+                {
+                    item.GetComponent<CapsuleCollider>().enabled = true;
+                }
+                item.AddComponent<Rigidbody>();
+            }
+            StartCoroutine("Die");
+        }
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(3);
+        died = true;
+    }
 
     ///-----------------------------------------<|MÉTODOS DE CLASE|>-------------------------------------------|
     ///--------------------------------------------------------------------------------------------------------|
-    
-    
+
+
     ///------------------------------------------------------------------<|Movimiento del flyerclaw
     void Moving()
     {
-
         timer++;
         if (timer == 100)
         {
@@ -67,16 +92,3 @@ public class Flyerclaw : MonoBehaviour
     }
 }
 
-public class Eye : MonoBehaviour
-{
-    public bool striked = false;
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag=="weapon")
-        {
-            striked = true;
-            GetComponent<SphereCollider>().enabled = false;
-        }
-        Debug.Log("ay hijueputa");
-    }
-}

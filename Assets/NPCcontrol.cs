@@ -20,6 +20,17 @@ public class NPCcontrol : MonoBehaviour
         }
 
     }
+
+    private void Update()
+    {
+        foreach (var item in flyerclaws)
+        {
+            if (item != null && item.GetComponent<Flyerclaw>().died) 
+            {
+                Destroy(item);
+            }
+        }
+    }
 }
 
 

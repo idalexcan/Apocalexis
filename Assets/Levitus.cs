@@ -30,14 +30,15 @@ public class Levitus : MonoBehaviour
 
     void ToSpear()
     {
-        if (weapon != null && weapon.transform.name == "Spear")
+
+        if (weapon != null && weapon.transform.name == "Rocket")
         {
             weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
-            weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
             weapon.GetComponent<Rigidbody>().useGravity = false;
             if (Input.GetMouseButtonDown(0))
             {
-                weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * 1000);////new Vector3(0,2,3)*1000)
+                weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * 2000);////new Vector3(0,2,3)*1000)
                 throwed = true;
                 weapon = null;
             }
@@ -59,6 +60,38 @@ public class Levitus : MonoBehaviour
             }
         }
     }
+
+    //void ToSpear()
+    //{
+    //    if (weapon != null && weapon.transform.name == "Spear")
+    //    {
+    //        weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
+    //        weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+    //        weapon.GetComponent<Rigidbody>().useGravity = false;
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * 2000);////new Vector3(0,2,3)*1000)
+    //            throwed = true;
+    //            weapon = null;
+    //        }
+    //        else
+    //        {
+    //            if (!throwed)
+    //            {
+    //                weapon.transform.position = transform.position;
+    //            }
+    //        }
+    //    }
+    //    if (throwed)
+    //    {
+    //        timer++;
+    //        if (timer == 70)
+    //        {
+    //            throwed = false;
+    //            timer = 0;
+    //        }
+    //    }
+    //}
 }
 
 
