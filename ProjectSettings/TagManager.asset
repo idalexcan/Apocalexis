@@ -10,6 +10,7 @@ TagManager:
   - inactiveClaw
   - claw
   - weapon
+  - flycannonzone
   layers:
   - Default
   - TransparentFX

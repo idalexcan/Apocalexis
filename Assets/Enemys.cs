@@ -23,7 +23,7 @@ public class Enemys : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name=="Rocket")
+        if (collision.transform.tag=="weapon")
         {
             foreach (var item in organs)
             {
@@ -40,6 +40,7 @@ public class Enemys : MonoBehaviour
             StartCoroutine("Die");
         }
     }
+
     ///------------------------------------------------------------------<|Corrutina que inica: "Muerto"
     public IEnumerator Die()
     {

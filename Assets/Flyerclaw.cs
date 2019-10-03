@@ -17,7 +17,7 @@ public class Flyerclaw : Enemys
 
     }
 
-    ///------------------------------------------------------------------<|Movimiento del flyerclaw
+    ///-----------------------------------------------------------------------------------<|Movimiento del flyerclaw
     public void Moving()
     {
         timer++;

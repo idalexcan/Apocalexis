@@ -15,8 +15,8 @@ public class Takeball : MonoBehaviour
     {
 
         Detect();
-        ToSpear();
-
+        //ToSpear();
+        Rocket.TakingSpear(ref weapon, ref throwed, ref timer, transform.position);
     }
 
     void Detect()
@@ -32,39 +32,42 @@ public class Takeball : MonoBehaviour
             }
         }
     }
+    
 
-    void ToSpear()
+}
+
+public class Rocket : MonoBehaviour
+{
+    public static void TakingSpear(ref GameObject _weapon, ref bool _throwed, ref int _timer, Vector3 position)
     {
-
-        if (weapon != null && weapon.transform.name == "Rocket")
+        if (_weapon != null && _weapon.transform.name == "Rocket")
         {
-            weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
-            weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-            weapon.GetComponent<Rigidbody>().useGravity = false;
+            _weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
+            _weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            _weapon.GetComponent<Rigidbody>().useGravity = false;
             if (Input.GetMouseButtonDown(0))
             {
-                weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * 2000);////new Vector3(0,2,3)*1000)
-                throwed = true;
-                weapon = null;
+                _weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - position).normalized * 2000);////new Vector3(0,2,3)*1000)
+                _throwed = true;
+                _weapon = null;
             }
             else
             {
-                if (!throwed)
+                if (!_throwed)
                 {
-                    weapon.transform.position = transform.position;
+                    _weapon.transform.position = position;
                 }
             }
         }
-        if (throwed)
+        if (_throwed)
         {
-            timer++;
-            if (timer == 70)
+            _timer++;
+            if (_timer == 70)
             {
-                throwed = false;
-                timer = 0;
+                _throwed = false;
+                _timer = 0;
             }
         }
     }
-
 }
 
