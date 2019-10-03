@@ -2,23 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Limbtype
+{
+    claw,
+    cannon
+}
+
 public class HandControl : MonoBehaviour
 {
-    public GameObject myclaw;
+    public GameObject myclaw; 
+    
     int timer = 0;
-
-
-    ///--------------------------------------<|MÉTODOS DEL MONO BIJEBIO|>--------------------------------------|
-    ///--------------------------------------------------------------------------------------------------------|
+    public Limbtype limbtype;
 
     void Update()
     {
-        MoveClaw();
-        AttackClaw();
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("maldita sea");
+        }
+        switch (limbtype)
+        {
+            case Limbtype.claw:
+                MoveClaw();
+                AttackClaw();
+                break;
+            case Limbtype.cannon:
+                MoveCannon();
+                AttackCannon();
+                break;
+            default:
+                break;
+        }
+        
     }
-
-    ///-----------------------------------------<|MÉTODOS DE CLASE|>-------------------------------------------|
-    ///--------------------------------------------------------------------------------------------------------|
 
     ///------------------------------------------------------------------<|Ataque de la garra al agarrar
     void AttackClaw()
@@ -32,7 +50,6 @@ public class HandControl : MonoBehaviour
             }
         }
     }
-
     ///------------------------------------------------------------------<|Movimiento de garra
     void MoveClaw()
     {
@@ -54,4 +71,15 @@ public class HandControl : MonoBehaviour
         }
     }
 
+
+    ///------------------------------------------------------------------<|Ataque de la garra al agarrar
+    void AttackCannon()
+    {
+        Debug.Log("marica ome");
+    }
+    ///------------------------------------------------------------------<|Movimiento de garra
+    void MoveCannon()
+    {
+
+    }
 }

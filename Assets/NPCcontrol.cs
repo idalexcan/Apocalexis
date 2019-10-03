@@ -22,7 +22,7 @@ public class NPCcontrol : MonoBehaviour
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             flyercannons.Add(GameObject.Instantiate(flyercannon));
         }

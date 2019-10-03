@@ -14,7 +14,7 @@ public class Flyercannon : Enemys
     private void Update()
     {
 
-        Moving();
+        //Moving();
         FlyFx();
     }
 

@@ -47,7 +47,8 @@ public class Rocket : MonoBehaviour
             _weapon.GetComponent<Rigidbody>().useGravity = false;
             if (Input.GetMouseButtonDown(0))
             {
-                _weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - position).normalized * 2000);////new Vector3(0,2,3)*1000)
+                _weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - position).normalized * 1000);////new Vector3(0,2,3)*1000)
+                _weapon.GetComponent<Rigidbody>().useGravity = true;
                 _throwed = true;
                 _weapon = null;
             }
