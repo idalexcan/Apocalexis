@@ -5,18 +5,26 @@ using UnityEngine;
 public class Takeball : MonoBehaviour
 {
     GameObject weapon;
-    GameObject throwedobj;
+    GameObject dropWeapon;
     bool throwed;
     int timer;
+    public static GameObject shotpoint;
+    GameObject hero;
 
+    public int damage;
+    public int potence;
 
+    private void Awake()
+    {
+        shotpoint = GameObject.Find("Shotpoint");
+        hero = GameObject.Find("Hero");
+    }
 
     void Update()
     {
-
         Detect();
-        //ToSpear();
-        Rocket.TakingSpear(ref weapon, ref throwed, ref timer, transform.position);
+        TakingWeapon();
+        //Spear.TakingSpear(ref weapon, ref dropWeapon, ref throwed, ref timer, transform.position);
     }
 
     void Detect()
@@ -32,43 +40,99 @@ public class Takeball : MonoBehaviour
             }
         }
     }
-    
 
-}
-
-public class Rocket : MonoBehaviour
-{
-    public static void TakingSpear(ref GameObject _weapon, ref bool _throwed, ref int _timer, Vector3 position)
+    void TakingWeapon()
     {
-        if (_weapon != null && _weapon.transform.name == "Rocket")
+        if (weapon != null)//&& weapon.transform.name == "Rocket"
         {
-            _weapon.transform.eulerAngles = GameObject.Find("Head").transform.eulerAngles;
-            _weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-            _weapon.GetComponent<Rigidbody>().useGravity = false;
+            weapon.transform.eulerAngles = Takeball.shotpoint.transform.eulerAngles;
+            weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            weapon.GetComponent<Rigidbody>().useGravity = false;
+
             if (Input.GetMouseButtonDown(0))
             {
-                _weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - position).normalized * 1000);////new Vector3(0,2,3)*1000)
-                _weapon.GetComponent<Rigidbody>().useGravity = true;
-                _throwed = true;
-                _weapon = null;
+                if (weapon.transform.name == "Rocket")
+                {
+                    potence = 1000;
+                }
+                if (weapon.transform.name == "Spear") 
+                {
+                    potence = 5000;
+                }
+                weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - transform.position).normalized * potence);////new Vector3(0,2,3)*1000)
+                weapon.GetComponent<Rigidbody>().useGravity = true;
+                throwed = true;
+                dropWeapon = weapon;
+                weapon = null;
             }
             else
             {
-                if (!_throwed)
+                if (!throwed)
                 {
-                    _weapon.transform.position = position;
+                    weapon.transform.position = transform.position;
                 }
             }
         }
-        if (_throwed)
+        if (throwed)
         {
-            _timer++;
-            if (_timer == 70)
+            timer++;
+            if (timer == 100)
             {
-                _throwed = false;
-                _timer = 0;
+                throwed = false;
+                timer = 0;
+                Destroy(dropWeapon);
             }
         }
     }
+
+
 }
+
+//public class Rocket : MonoBehaviour
+//{
+    
+//    private void Awake()
+//    {
+//        damage = 50;
+//    }
+//    public static void TakingRocket(ref GameObject _weapon, ref GameObject _dropWeapon, ref bool _throwed, ref int _timer, Vector3 position)
+//    {
+//        if (_weapon != null && _weapon.transform.name == "Rocket")
+//        {
+//            _weapon.transform.eulerAngles = Takeball.shotpoint.transform.eulerAngles;
+//            _weapon.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+//            _weapon.GetComponent<Rigidbody>().useGravity = false;
+
+//            if (Input.GetMouseButtonDown(0))
+//            {
+//                if (_weapon.transform.name == "Rocket")
+//                {
+//                    potence = 1000;
+//                }
+//                _weapon.GetComponent<Rigidbody>().AddForce((GameObject.Find("Shotpoint").transform.position - position).normalized * potence);////new Vector3(0,2,3)*1000)
+//                _weapon.GetComponent<Rigidbody>().useGravity = true;
+//                _throwed = true;
+//                _dropWeapon = _weapon;
+//                _weapon = null;
+//            }
+//            else
+//            {
+//                if (!_throwed)
+//                {
+//                    _weapon.transform.position = position;
+//                }
+//            }
+//        }
+//        if (_throwed)
+//        {
+//            _timer++;
+//            if (_timer == 300)
+//            {
+//                _throwed = false;
+//                _timer = 0;
+//                Destroy(_dropWeapon);
+//            }
+//        }
+//    }
+//}
 

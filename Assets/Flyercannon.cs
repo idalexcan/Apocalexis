@@ -5,46 +5,46 @@ using UnityEngine;
 public class Flyercannon : Enemys
 {
     public GameObject[] alas = new GameObject[4];
+    GameObject hero;
     private void Awake()
     {
         myzone = NPCcontrol.flyercannonZones[Random.Range(0, NPCcontrol.flyercannonZones.Length)];
-        transform.position = PosInZone();
+        transform.position = PosInZone(3);
+        hero = GameObject.Find("Rebanada");
     }
 
     private void Update()
     {
 
-        //Moving();
+        Moving();
         FlyFx();
     }
 
-    ///---------------------------------------------------------------------------------------<|Movimiento del flyerclaw
+    public new void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name == "Spear")
+        {
+            StrikeReaction();
+        }
+        //Reaction("Spear", collision);
+    }
+
+    ///---------------------------------------------------------------------------------------<|Movimiento del flyercannon
+    Vector3 aux;
     public void Moving()
     {
+        transform.LookAt(hero.transform.position);
         timer++;
-        if (timer == timelapse/2)
+        if (timer == timelapse)
         {
-            direcMove = (PosInZone() - transform.position).normalized;
-        }
-        else if (timer == timelapse)
-        {
-            
-            direcRotate = Random.Range(-2, 3);
+            direcMove = (PosInZone(Random.Range(3, 15)) - transform.position).normalized;
+            direcRotate = Random.Range(-3, 4);
+            //transform.eulerAngles += new Vector3(Random.Range(0, 90), 0, 0);
             timer = 0;
-            timelapse = Random.Range(10, 180);
+            timelapse = Random.Range(5, 170);
         }
-        transform.position += direcMove * 0.1f;
+        transform.position += direcMove * 0.04f;
         transform.eulerAngles += new Vector3(0, direcRotate, 0);
-        //timer++;
-        //if (timer == timelapse)
-        //{
-        //    direcMove = (PosInZone() - transform.position).normalized;
-        //    direcRotate = Random.Range(-3, 4);
-        //    timer = 0;
-        //    timelapse = Random.Range(5, 170);
-        //}
-        //transform.position += direcMove * 0.04f;
-        //transform.eulerAngles += new Vector3(0, direcRotate, 0);
     }
 
     ///---------------------------------------------------------------------------------------<|Efecto de aleteo
@@ -73,7 +73,7 @@ public class Flyercannon : Enemys
             }
             else if (timerfly==8)
             {
-                item.transform.eulerAngles = new Vector3(father.z, father.y, 0);
+                item.transform.eulerAngles = new Vector3(father.x, father.y, 0);
             }
             else if (timerfly<=10)
             {

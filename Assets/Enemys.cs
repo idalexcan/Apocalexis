@@ -23,7 +23,12 @@ public class Enemys : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag=="weapon")
+        
+    }
+
+    public void Reaction(string weapon, Collision collision)
+    {
+        if (collision.transform.name == weapon)
         {
             foreach (var item in organs)
             {
@@ -41,20 +46,37 @@ public class Enemys : MonoBehaviour
         }
     }
 
+    public void StrikeReaction()
+    {
+        foreach (var item in organs)
+        {
+            if (item.GetComponent<SphereCollider>())
+            {
+                item.GetComponent<SphereCollider>().enabled = true;
+            }
+            if (item.GetComponent<CapsuleCollider>())
+            {
+                item.GetComponent<CapsuleCollider>().enabled = true;
+            }
+            item.AddComponent<Rigidbody>();
+        }
+        StartCoroutine("Die");
+    }
+
     ///------------------------------------------------------------------<|Corrutina que inica: "Muerto"
     public IEnumerator Die()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         died = true;
     }
 
     ///------------------------------------------------------------------<|Retorno de vector dentro de zona
-    public Vector3 PosInZone()
+    public Vector3 PosInZone(float toY)
     {
         float range = myzone.transform.localScale.x / 2;
         float x = Random.Range(range * (-1), range);
         float z = Random.Range(range * (-1), range);
         Vector3 r = myzone.transform.position;
-        return r += new Vector3(x, 5, z);
+        return r += new Vector3(x, toY, z);
     }
 }

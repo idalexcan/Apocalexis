@@ -18,11 +18,11 @@ public class NPCcontrol : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
         {
             flyerclaws.Add(GameObject.Instantiate(flyerclawref));
         }
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             flyercannons.Add(GameObject.Instantiate(flyercannon));
         }
@@ -33,6 +33,13 @@ public class NPCcontrol : MonoBehaviour
         foreach (var item in flyerclaws)
         {
             if (item != null && item.GetComponent<Flyerclaw>().died) 
+            {
+                Destroy(item);
+            }
+        }
+        foreach (var item in flyercannons)
+        {
+            if (item != null && item.GetComponent<Flyercannon>().died)
             {
                 Destroy(item);
             }

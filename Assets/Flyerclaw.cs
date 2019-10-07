@@ -7,14 +7,23 @@ public class Flyerclaw : Enemys
     private void Awake()
     {
         myzone = NPCcontrol.flyclawZones[Random.Range(0, NPCcontrol.flyclawZones.Length)];
-        transform.position = PosInZone();
+        transform.position = PosInZone(3);
     }
     
     private void Update()
     {
+        //Moving();
 
-        Moving();
 
+    }
+
+    public new void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name=="Rocket")
+        {
+            StrikeReaction();
+        }
+        //Reaction("Rocket", collision);
     }
 
     ///-----------------------------------------------------------------------------------<|Movimiento del flyerclaw
@@ -23,12 +32,12 @@ public class Flyerclaw : Enemys
         timer++;
         if (timer == timelapse)
         {
-            direcMove = (PosInZone() - transform.position).normalized;
+            direcMove = (PosInZone(0) - transform.position).normalized;
             direcRotate = Random.Range(-3, 4);
             timer = 0;
             timelapse = Random.Range(5, 170);
         }
-        transform.position += direcMove * 0.04f;
+        transform.position += direcMove * 0.07f;
         transform.eulerAngles += new Vector3(0, direcRotate, 0);
     }
 

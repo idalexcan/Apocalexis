@@ -2,51 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Limbtype
-{
-    claw,
-    cannon
-}
-
 public class HandControl : MonoBehaviour
 {
-    public GameObject myclaw; 
-    
+    public GameObject limb; 
     int timer = 0;
-    public Limbtype limbtype;
+    GameObject hero;
+    GameObject[] people;
+
+    private void Awake()
+    {
+        hero = GameObject.Find("Rebanada");
+    }
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("maldita sea");
-        }
-        switch (limbtype)
-        {
-            case Limbtype.claw:
-                MoveClaw();
-                AttackClaw();
-                break;
-            case Limbtype.cannon:
-                MoveCannon();
-                AttackCannon();
-                break;
-            default:
-                break;
-        }
-        
+        MoveClaw();
+        AttackClaw();
     }
 
     ///------------------------------------------------------------------<|Ataque de la garra al agarrar
     void AttackClaw()
     {
-        foreach (var item in GameObject.FindGameObjectsWithTag("Player"))
+        if ((hero.transform.position - limb.transform.position).magnitude < 1)//&& HeroControl.caught==false
         {
-            if ((item.transform.position - myclaw.transform.position).magnitude < 1)
+            hero.transform.position = limb.transform.position;
+            
+            if (HeroControl.life>0)
             {
-                item.GetComponent<MeshRenderer>().material.color = Color.red;
-                Destroy(item);
+                HeroControl.life -= 0.5f;
             }
         }
     }
@@ -54,15 +37,15 @@ public class HandControl : MonoBehaviour
     void MoveClaw()
     {
         timer++;
-        if (timer <= 8)
+        if (timer <= 30)
         {
-            myclaw.transform.position += transform.up * 0.4f;
+            limb.transform.position += transform.up * 0.5f;
         }
-        else if (timer <= 70)
+        else if (timer <= 170)
         {
-            if ((transform.position - myclaw.transform.position).magnitude > 0.3f)
+            if ((transform.position - limb.transform.position).magnitude > 0.3f)
             {
-                myclaw.transform.position += (transform.position - myclaw.transform.position).normalized * 0.2f;
+                limb.transform.position += (transform.position - limb.transform.position).normalized * 0.3f;
             }
         }
         else
@@ -71,15 +54,4 @@ public class HandControl : MonoBehaviour
         }
     }
 
-
-    ///------------------------------------------------------------------<|Ataque de la garra al agarrar
-    void AttackCannon()
-    {
-        Debug.Log("marica ome");
-    }
-    ///------------------------------------------------------------------<|Movimiento de garra
-    void MoveCannon()
-    {
-
-    }
 }
