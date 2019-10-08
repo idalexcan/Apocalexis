@@ -7070,9 +7070,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4913171136212803143}
   - component: {fileID: 2130583009834259286}
+  - component: {fileID: 2451300004287917255}
+  - component: {fileID: 3373202847460360039}
   m_Layer: 0
   m_Name: Person
-  m_TagString: Untagged
+  m_TagString: people
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7086,7 +7088,7 @@ Transform:
   m_GameObject: {fileID: 6921833093857325745}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2848776, y: 0.2848776, z: 0.2848776}
   m_Children:
   - {fileID: 4021375942052049978}
   - {fileID: 6636199442781469959}
@@ -7113,6 +7115,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.445178, y: 3.337184, z: 1.303899}
   m_Center: {x: 0, y: 0.47609282, z: 0.1519495}
+--- !u!54 &2451300004287917255
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921833093857325745}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &3373202847460360039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921833093857325745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2fbc7a8bba95940aeb3dd8349a7c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal: {fileID: 5685780431018398588}
+  engaloched: {fileID: 7254684330095737691}
+  organs:
+  - {fileID: 7254684330095737691}
+  - {fileID: 7510120416134044877}
+  - {fileID: 2731636514071610697}
+  - {fileID: 6289224164284977163}
+  - {fileID: 3307628519464109691}
+  - {fileID: 1795353866969478042}
+  - {fileID: 1371957398993931542}
+  - {fileID: 105018433740150320}
 --- !u!1 &6934619933748056589
 GameObject:
   m_ObjectHideFlags: 0
@@ -7789,7 +7830,7 @@ Transform:
   m_GameObject: {fileID: 7510120416134044877}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.05, z: 0.06}
-  m_LocalScale: {x: 1.1690625, y: 1.0711249, z: 0.8125}
+  m_LocalScale: {x: 1.0471877, y: 1.0711249, z: 0.8125}
   m_Children: []
   m_Father: {fileID: 4913171136212803143}
   m_RootOrder: 2

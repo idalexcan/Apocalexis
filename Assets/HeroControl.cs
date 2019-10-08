@@ -9,9 +9,11 @@ public class HeroControl : MonoBehaviour
     public static float speed;
     public static float life = 100;
     public static int specialHab=50;
+    public static Vector3 pos;
     public Text specialhab;
     public Text showlife;
     GameObject failed;
+
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class HeroControl : MonoBehaviour
             Moving();
             Impulse();
             LifeThings();
+            pos = transform.position;
         }
         else
         {
@@ -104,57 +107,15 @@ public class HeroControl : MonoBehaviour
     {
         showlife.text = "LIFE:" + life;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.name=="Bullet")
+        {
+            life = life - 5;
+        }
+    }
 }
 
 
-
-//public class Proyectile : MonoBehaviour
-//{
-//    float impulse;
-//    float impulseaux;
-//    bool shot;
-//    int timer=0;
-
-//    public Vector3 initialpos;
-    
-//    private void Update()
-//    {
-//        if (timer==100)
-//        {
-//            Shot();
-//        }
-//        else
-//        {
-//            timer++;
-//            Debug.Log("waiting!!");
-//        }
-//    }
-
-//    void Shot()
-//    {
-//        if (Input.GetMouseButton(0))
-//        {
-//            impulse += 25;
-
-//        }
-//        else if (impulse != 0)
-//        {
-//            shot = true;
-//            impulseaux = impulse;
-//            impulse = 0;
-//        }
-//        if (shot)
-//        {
-//            GetComponent<Rigidbody>().AddForce(transform.forward * impulseaux);
-//            Debug.Log("LANZAMIENTO!---------->" + impulseaux);
-//            shot = false;
-//        }
-
-//        if (Input.GetMouseButton(1))
-//        {
-//            transform.position = initialpos + new Vector3(0, 0, 2);
-//            GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-//        }
-//    }
-//}
 

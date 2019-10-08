@@ -11,6 +11,7 @@ TagManager:
   - claw
   - weapon
   - flycannonzone
+  - people
   layers:
   - Default
   - TransparentFX

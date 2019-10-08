@@ -12,18 +12,19 @@ public class HandControl : MonoBehaviour
     private void Awake()
     {
         hero = GameObject.Find("Rebanada");
+        people = GameObject.FindGameObjectsWithTag("people");
     }
 
     void Update()
     {
         MoveClaw();
-        AttackClaw();
+        AttackToHero();
     }
 
-    ///------------------------------------------------------------------<|Ataque de la garra al agarrar
-    void AttackClaw()
+    ///------------------------------------------------------------------<|Ataque de la garra
+    void AttackToHero()
     {
-        if ((hero.transform.position - limb.transform.position).magnitude < 1)//&& HeroControl.caught==false
+        if ((hero.transform.position - limb.transform.position).magnitude < 1)
         {
             hero.transform.position = limb.transform.position;
             
@@ -32,6 +33,7 @@ public class HandControl : MonoBehaviour
                 HeroControl.life -= 0.5f;
             }
         }
+        
     }
     ///------------------------------------------------------------------<|Movimiento de garra
     void MoveClaw()

@@ -10,6 +10,8 @@ public class NPCcontrol : MonoBehaviour
     public GameObject flyercannon;
     public static List<GameObject> flyercannons=new List<GameObject>();
     public static GameObject[] flyercannonZones;
+    public GameObject person;
+    public static List<GameObject> people = new List<GameObject>();
     private void Awake()
     {
         flyclawZones = GameObject.FindGameObjectsWithTag("flyclawzone");
@@ -25,6 +27,10 @@ public class NPCcontrol : MonoBehaviour
         for (int i = 0; i < 1; i++)
         {
             flyercannons.Add(GameObject.Instantiate(flyercannon));
+        }
+        for (int i = 0; i < 1; i++)
+        {
+            people.Add(GameObject.Instantiate(person));
         }
     }
 
