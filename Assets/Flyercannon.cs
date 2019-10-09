@@ -39,7 +39,6 @@ public class Flyercannon : Enemys
         {
             direcMove = (PosInZone(Random.Range(3, 15)) - transform.position).normalized;
             direcRotate = Random.Range(-3, 4);
-            //transform.eulerAngles += new Vector3(Random.Range(0, 90), 0, 0);
             timer = 0;
             timelapse = Random.Range(5, 170);
         }

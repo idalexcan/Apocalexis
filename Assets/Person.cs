@@ -10,7 +10,7 @@ public class Person : MonoBehaviour
         engaloched
     }
 
-    State state;
+    public State state;
     public GameObject normal;
     public GameObject engaloched;
     public GameObject[] organs = new GameObject[4];
@@ -37,6 +37,10 @@ public class Person : MonoBehaviour
             case State.engaloched:
                 normal.SetActive(false);
                 engaloched.SetActive(true);
+                if (true)
+                {
+
+                }
                 EngalochedConduct();
                 infected = true;
                 break;
@@ -51,6 +55,13 @@ public class Person : MonoBehaviour
         {
             state = State.engaloched;
             transform.position += new Vector3(0, 1, 0);
+            bool onetime=true;
+            if (onetime)
+            {
+                NPCcontrol.enemies++;
+                onetime = false;
+            }
+            
         }
         if (collision.transform.tag=="weapon")
         {
@@ -89,7 +100,7 @@ public class Person : MonoBehaviour
             timer = 0;
             timelapse = Random.Range(10, 200);
         }
-        //transform.position += transform.forward * (speed/100);
+        transform.position += transform.forward * (speed/100);
     }
 
     void EngalochedConduct()

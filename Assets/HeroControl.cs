@@ -8,30 +8,16 @@ public class HeroControl : MonoBehaviour
     public static float velocity = 5;
     public static float speed;
     public static float life = 100;
-    public static int specialHab=50;
+    public static int hability=50;
     public static Vector3 pos;
-    public Text specialhab;
-    public Text showlife;
-    GameObject failed;
 
-
-    private void Awake()
-    {
-        failed = GameObject.Find("Failed");
-        failed.SetActive(false);
-    }
     private void Update()
     {
-        if (life>0)
+        if (life > 0 && pos.y > -100 && NPCcontrol.enemies > 0) 
         {
             Moving();
             Impulse();
-            LifeThings();
             pos = transform.position;
-        }
-        else
-        {
-            failed.SetActive(true);
         }
         
     }
@@ -75,7 +61,7 @@ public class HeroControl : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            if (specialHab>0)
+            if (hability>0)
             {
                 if (Input.GetKeyDown(KeyCode.W))
                 {
@@ -89,24 +75,19 @@ public class HeroControl : MonoBehaviour
                 {
                     transform.position += transform.up * 15;
                 }
-                specialHab--;
+                hability--;
             }
         }
         else
         {
-            if (specialHab<50)
+            if (hability<50)
             {
-                specialHab++;
+                hability++;
             }
             
         }
-        specialhab.text = "SPECIAL HAB:"+specialHab;
     }
     
-    void LifeThings()
-    {
-        showlife.text = "LIFE:" + life;
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
