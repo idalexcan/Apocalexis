@@ -14,6 +14,8 @@ public class Person : MonoBehaviour
     public GameObject normal;
     public GameObject engaloched;
     public GameObject[] organs = new GameObject[4];
+    public bool died;
+    public bool infected;
 
     int timer;
     int timelapse=50;
@@ -23,27 +25,24 @@ public class Person : MonoBehaviour
     {
         transform.position += new Vector3(0, 10, 0);
     }
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
         switch (state)
         {
             case State.normal:
-                
+                NormalConduct();
+                infected = false;
                 break;
             case State.engaloched:
                 normal.SetActive(false);
                 engaloched.SetActive(true);
+                EngalochedConduct();
+                infected = true;
                 break;
             default:
                 break;
         }
-        //NormalConduct();
-        EngalochedConduct();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -61,7 +60,15 @@ public class Person : MonoBehaviour
                 item.AddComponent<SphereCollider>();
                 item.AddComponent<Rigidbody>();
             }
+            StartCoroutine("Die");
         }
+        
+    }
+
+    public IEnumerator Die()
+    {
+        yield return new WaitForSeconds(1);
+        died = true;
     }
 
     void NormalConduct()
@@ -82,7 +89,7 @@ public class Person : MonoBehaviour
             timer = 0;
             timelapse = Random.Range(10, 200);
         }
-        transform.position += transform.forward * (speed/100);
+        //transform.position += transform.forward * (speed/100);
     }
 
     void EngalochedConduct()

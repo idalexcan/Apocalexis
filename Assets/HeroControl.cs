@@ -114,6 +114,14 @@ public class HeroControl : MonoBehaviour
         {
             life = life - 5;
         }
+        if (collision.gameObject.GetComponent<Person>())
+        {
+            if (collision.gameObject.GetComponent<Person>().infected)
+            {
+                life -= 1;
+            }
+        }
+        
     }
 }
 

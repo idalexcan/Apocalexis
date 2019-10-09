@@ -13,8 +13,6 @@ public class Flyerclaw : Enemys
     private void Update()
     {
         //Moving();
-
-
     }
 
     public new void OnCollisionEnter(Collision collision)
@@ -23,7 +21,6 @@ public class Flyerclaw : Enemys
         {
             StrikeReaction();
         }
-        //Reaction("Rocket", collision);
     }
 
     ///-----------------------------------------------------------------------------------<|Movimiento del flyerclaw

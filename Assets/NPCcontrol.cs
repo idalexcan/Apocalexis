@@ -36,9 +36,16 @@ public class NPCcontrol : MonoBehaviour
 
     private void Update()
     {
+        DestroyKilled();
+
+        
+    }
+
+    void DestroyKilled()
+    {
         foreach (var item in flyerclaws)
         {
-            if (item != null && item.GetComponent<Flyerclaw>().died) 
+            if (item != null && item.GetComponent<Flyerclaw>().died)
             {
                 Destroy(item);
             }
@@ -50,22 +57,15 @@ public class NPCcontrol : MonoBehaviour
                 Destroy(item);
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Z))
+        foreach (var item in people)
         {
-            GameObject go = GameObject.Instantiate(GameObject.Find("Rocket"));
-            go.transform.position = GameObject.Find("Takeball").transform.position;
-            go.transform.tag = "weapon";
-            go.transform.name = "Rocket";
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            GameObject go = GameObject.Instantiate(GameObject.Find("Spear"));
-            go.transform.position = GameObject.Find("Takeball").transform.position;
-            go.transform.tag = "weapon";
-            go.transform.name = "Spear";
+            if (item != null && item.GetComponent<Person>().died)
+            {
+                Destroy(item);
+            }
         }
     }
+
 }
 
 

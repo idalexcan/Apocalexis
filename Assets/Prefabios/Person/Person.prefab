@@ -7154,6 +7154,7 @@ MonoBehaviour:
   - {fileID: 1795353866969478042}
   - {fileID: 1371957398993931542}
   - {fileID: 105018433740150320}
+  died: 0
 --- !u!1 &6934619933748056589
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,11 +7,11 @@ TagManager:
   - flyclaw
   - flyclawzone
   - activeClaw
-  - inactiveClaw
   - claw
   - weapon
   - flycannonzone
   - people
+  - peoplePoint
   layers:
   - Default
   - TransparentFX
