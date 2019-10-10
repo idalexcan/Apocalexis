@@ -6,10 +6,11 @@ public class CameraControl : MonoBehaviour
 {
     public static float rotY;
     float x = 0, y = 0;
-
+    
     private void Start()
     {
         //GameObject.Find("sujeto").AddComponent<Prueba>();
+        
     }
 
     void Update()

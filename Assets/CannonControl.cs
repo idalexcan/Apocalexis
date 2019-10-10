@@ -14,7 +14,7 @@ public class CannonControl : MonoBehaviour
         bullet.GetComponent<SphereCollider>().enabled = false;
         
     }
-
+    
     private void Update()
     {
         timer++;
